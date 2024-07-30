@@ -1,4 +1,4 @@
-const tempData = [
+const movies = [
   {
     title: "Guardians of the Galaxy Vol. 2",
     year: 2017,
