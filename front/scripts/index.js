@@ -31,7 +31,7 @@ $.get("https://students-api.up.railway.app/movies", (movies) => {
         moviesContainer.appendChild(cardMovie);
     
     })
-})                  
+})                 
 
 // document.addEventListener("DOMContentLoaded", () => {
 //     const cardsContainer = document.getElementById("cardsContainer");
