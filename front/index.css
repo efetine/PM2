@@ -1,0 +1,18 @@
+.banner {
+  color: #fff;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #001021;
+  width: 100dvw;
+}
+
+.card-img-top {
+  height: 320px;
+}
+
+.card-text {
+  height: 12rem;
+}

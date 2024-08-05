@@ -1,4 +1,9 @@
-$.get("https://students-api.up.railway.app/movies", (movies) => {
+const axios = require("axios")
+
+async function getMovies() {
+    const response = await axios.get("https://students-api.up.railway.app/movies")
+
+    const movies = response.data
 
     movies.map((movie) => {
         const cardMovie = document.createElement("div");
@@ -29,9 +34,10 @@ $.get("https://students-api.up.railway.app/movies", (movies) => {
     
         const moviesContainer = document.getElementById("movies-cards");
         moviesContainer.appendChild(cardMovie);
-    
     })
-})                 
+}
+
+getMovies()
 
 // document.addEventListener("DOMContentLoaded", () => {
 //     const cardsContainer = document.getElementById("cardsContainer");
