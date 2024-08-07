@@ -1,8 +1,20 @@
 const express = require("express");
-const moviesRouter = require("./routes/movies-router")
+const morgan = require("morgan");
+const cors = require("cors");
+
+const moviesRouter = require("./routes/movies.router");
 
 const server = express();
 
-server.use("/movies", moviesRouter)
+// middlewares   que ya vienen establecidos, uno ya puede instalar y configurar /pre build
+server.use(express.json());
+server.use(morgan("dev"));
+server.use(
+  cors({
+    origin: "http://localhost",
+  })
+);
 
-module.exports = server
+server.use("/movies", moviesRouter);
+
+module.exports = server;

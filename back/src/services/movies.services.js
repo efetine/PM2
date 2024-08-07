@@ -1,4 +1,19 @@
+const axios = require("axios");
+const Movie = require("../models/movie");
+
+function moviesService() {
+  return axios
+    .get("https://students-api.up.railway.app/movies")
+    .then((res) => {
+      return res.data;
+    })
+    .catch((reason) => {
+      throw Error(reason);
+    });
+}
+
 function getMovies() {
+  // Asumamos que estos datos vinieron de una base de datos o de una API externa.
   const movies = [
     {
       title: "Guardians of the Galaxy Vol. 2",
@@ -32,7 +47,21 @@ function getMovies() {
     },
   ];
 
-  return movies;
+  const moviesInstances = movies.map((movie) => {
+    const movieInstance = new Movie(
+      movie.title,
+      movie.director,
+      movie.year,
+      movie.duration,
+      movie.genre,
+      movie.rate,
+      movie.poster
+    );
+
+    return movieInstance;
+  });
+
+  return moviesInstances;
 }
 
 function createMovie(req, res) {
