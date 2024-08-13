@@ -1,40 +1,58 @@
 const moviesServices = require("../services/movies.services");
 
-function movieController(req, res) {
-  movieService()
-    .then((response) => {
-      res.send(response);
-    })
-    .catch((error) => {
-      res.send(error);
-    });
+async function getMovies(req, res) {
+  try {
+    const movies = await moviesServices.getMovies();
+    return res.json(movies);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 }
 
-function getMovies(req, res) {
-  let movies = null;
+// async function getMovie(req, res) {
+//   try {
+//     const movies = await moviesServices.getMovie();
+//     return res.json(movies);
+//   } catch (error) {
+//     return res.status(500).json(error);
+//   }
+// }
+
+async function createMovie(req, res) {
+  const movie = req.body;
 
   try {
-    movies = moviesServices.getMovies();
+    const newMovie = await moviesServices.createMovie(movie);
+
+    return res.status(201).json(newMovie);
   } catch (error) {
-    res.status(500);
-    console.log(error.message);
-    res.send();
-    return;
+    return res.status(500).json(error);
   }
-
-  res.send(movies);
 }
 
-function createMovie(req, res) {
-  res.send("POST Hello from movies");
+async function updateMovie(req, res) {
+  const movieId = req.params.id;
+  const movie = req.body;
+
+  try {
+    const newMovie = await moviesServices.updateMovie(movieId, movie);
+
+    return res.status(200).json(newMovie);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 }
 
-function updateMovie(req, res) {
-  res.send("PUT Hello from movies");
-}
+async function deleteMovie(req, res) {
+  const movieId = req.params.id;
 
-function deleteMovie(req, res) {
-  res.send("DELETE Hello from movies");
+  try {
+    const newMovie = await moviesServices.deleteMovie(movieId);
+
+    return res.status(200).json(newMovie);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 }
 
 module.exports = {

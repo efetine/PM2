@@ -1,4 +1,15 @@
 body {
-  background-color: #001021;
+  background-color: black;
   color: #f1f2ee;
+}
+
+p {
+  margin: 0;
+}
+
+footer {
+  background-color: darkred;
+  height: 3rem;
+  text-align: center;
+  margin: auto 0;
 }

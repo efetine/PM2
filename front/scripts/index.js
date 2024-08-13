@@ -1,94 +1,84 @@
-const axios = require("axios")
+const axios = require("axios");
 
 async function getMovies() {
-    const response = await axios.get("https://students-api.up.railway.app/movies")
+  const response = await axios.get("http://localhost:3000/movies");
 
-    const movies = response.data
+  console.log(response.data);
 
-    movies.map((movie) => {
-        const cardMovie = document.createElement("div");
-        const movieTitle = document.createElement("h3");
-        const movieDirector = document.createElement("h4");
-        const movieYear = document.createElement("p");
-        const movieDuration = document.createElement("p");
-        const movieGenre = document.createElement("p");
-        const movieRate = document.createElement("p");
-        const moviePoster = document.createElement("img");
-        
-        movieTitle.innerText = movie.title;
-        movieDirector.innerText = movie.director;
-        movieYear.innerText = movie.year;
-        movieDuration.innerText = movie.duration;
-        movieGenre.innerText = movie.genre;
-        movieRate.innerText = movie.rate;
-        moviePoster.src = movie.poster;
-        // moviePoster.alt = `Poster of ${title}`;
-    
-        cardMovie.appendChild(movieTitle);
-        cardMovie.appendChild(movieDirector);
-        cardMovie.appendChild(movieYear);
-        cardMovie.appendChild(movieDuration);
-        cardMovie.appendChild(movieGenre);
-        cardMovie.appendChild(movieRate);
-        cardMovie.appendChild(moviePoster);
-    
-        const moviesContainer = document.getElementById("movies-cards");
-        moviesContainer.appendChild(cardMovie);
-    })
+  // const movies = [...response.data, ...response.data, ...response.data];
+  const movies = response.data;
+
+  console.log({ movies });
+
+  movies.map((movie) => createMovieHTML(movie));
 }
 
-getMovies()
+getMovies();
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     const cardsContainer = document.getElementById("cardsContainer");
-//     const movies = buildMovies();
-//     movies.forEach((movie) => cardsContainer.appendChild(movie));
-// })
+async function deleteMovie(movieId) {
+  await axios.delete(`http://localhost:3000/movies/${movieId}`);
 
+  const movieCard = document.getElementById(movieId);
 
-// function buildMovie (movie) {
-//     const (title, year, director, duration, genre, rate, poster) = movie;
-//     const movieTitle = document.createElement("h3");
-//     const movieDirector = document.createElement("h4");
-//     const movieYear = document.createElement("p");
-//     const movieDuration = document.createElement("p");
-//     const movieGenre = document.createElement("p");
-//     const movieRate = document.createElement("p");
-//     const moviePoster = document.createElement("img");
+  movieCard.remove();
+}
 
-//     movieTitle.innerText = movie.title;
-//     movieDirector.innerText = movie.director;
-//     movieYear.innerText = movie.year;
-//     movieDuration.innerText = movie.duration;
-//     movieGenre.innerText = movie.genre;
-//     movieRate.innerText = movie.rate;
-//     moviePoster.src = movie.poster;
+function createMovieHTML(movie) {
+  const cardMovie = document.createElement("div");
+  const cardBody = document.createElement("div");
+  const movieTitle = document.createElement("h3");
+  const movieDirector = document.createElement("h4");
+  const movieYear = document.createElement("p");
+  const movieDuration = document.createElement("p");
+  const movieGenre = document.createElement("p");
+  const movieRate = document.createElement("p");
+  const moviePoster = document.createElement("img");
+  const deleteButton = document.createElement("button");
 
-//     const cardFront = document.createElement("div")
-//     const cardBack = document.createElement("div")
+  cardMovie.className = "card bg-dark text-white";
+  cardMovie.style = "width: 18rem";
+  cardMovie.id = movie._id;
 
-//     cardFront.appendChild(moviePoster);
-//     cardBack.appendChild(movieTitle);
-//     cardBack.appendChild(movieDirector);
-//     cardBack.appendChild(movieYear);
-//     cardBack.appendChild(movieDuration);
-//     cardBack.appendChild(movieGenre);
-//     cardBack.appendChild(movieRate);
+  cardBody.className =
+    "card-img-overlay d-flex flex-column justify-content-end";
 
-//     const moviesContainer = document.getElementById("movies-cards");
-//     moviesContainer.appendChild(cardMovie);
+  movieTitle.innerText = movie.title;
+  movieTitle.className = "card-title";
+  movieTitle.style = "font-size: 1.25rem";
 
-// }
+  movieDirector.innerText = movie.director;
+  movieDirector.style = "font-size: 1rem";
+  movieYear.innerText = movie.year;
+  movieDuration.innerText = movie.duration;
+  movieGenre.innerText = movie.genre;
+  movieRate.innerText = movie.rate;
 
+  moviePoster.src = movie.poster;
+  moviePoster.className = "card-img opacity-75";
+  moviePoster.style = "width: 18rem; height: 28rem";
+  // moviePoster.alt = `Poster of ${title}`;
 
-// function buildMovies () {
-//     $.get("https://students-api.up.railway.app/movies", (data, status) => {
-            // console.log(data)
-//     })
-// } 
+  deleteButton.innerText = "X";
+  deleteButton.className =
+    "btn btn-secondary position-absolute top-0 end-0 m-1";
+  deleteButton.style = "width: 3rem; height: 3rem;";
+  // deleteButton.onclick = () => deleteMovie(movie._id);
+  // deleteButton["data-bs-target"] = "delete-modal";
 
-// // esto lo podes hacer de la forma que te guste
-    // //! Esto es por si quieren agregar a cada genero un input o etiquetas
-    // genre.map((gen) => document.createElement("h4"))
-    // //! esto es porque como viene un array los una
-    // genre.join("")
+  cardBody.appendChild(movieTitle);
+  cardBody.appendChild(movieDirector);
+  cardBody.appendChild(movieYear);
+  cardBody.appendChild(movieDuration);
+  cardBody.appendChild(movieGenre);
+  cardBody.appendChild(movieRate);
+  cardMovie.appendChild(moviePoster);
+  cardMovie.appendChild(cardBody);
+  cardBody.appendChild(deleteButton);
+
+  const moviesContainer = document.getElementById("movies-cards");
+  moviesContainer.appendChild(cardMovie);
+}
+
+module.exports = {
+  createMovieHTML,
+};

@@ -18,11 +18,36 @@
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="navbar.css" />
     <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="movies.css" />
+    <script defer src="./dist/bundle.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"></a>
+        <a class="navbar-brand d-flex gap-2 align-items-center" href="#">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-popcorn"
+          >
+            <path
+              d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4"
+            />
+            <path d="M10 22 9 8" />
+            <path d="m14 22 1-14" />
+            <path
+              d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z"
+            />
+          </svg>
+          CINEFLIX
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -37,10 +62,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./movies.html">Movies</a>
+              <a class="nav-link active" href="./movies.html">Movies</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./series.html">Anime</a>
@@ -50,7 +75,6 @@
       </div>
     </nav>
     <header>
-      <h1>CINEFLIX</h1>
       <div
         id="carouselExampleSlidesOnly"
         class="carousel slide"
@@ -104,40 +128,104 @@
     </header>
     <main>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Agregar pelicula
-      </button>
+      <div class="position-fixed bottom-0 end-0 z-1 p-3">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#add-movie-modal"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-plus"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+          </svg>
+          Agregar pelicula
+        </button>
+      </div>
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-theme="dark">
+      <div
+        class="modal fade"
+        id="add-movie-modal"
+        tabindex="-1"
+        aria-labelledby="add-movie-modal"
+        aria-hidden="true"
+        data-bs-theme="dark"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar pelicula</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h1 class="modal-title fs-5" id="add-movie-modal">
+                Agregar pelicula
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="modal-body">
-              <form id="test" action="" class="row g-4 needs-validation movies-form">
+              <form id="add-movie" class="row g-4 needs-validation movies-form">
                 <div class="d-flex flex-column gap-2">
                   <label for="title">Titulo</label>
-                  <input type="text" name="" id="title" placeholder="Titulo de una pelicula" required>
+                  <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    placeholder="Titulo de una pelicula"
+                    required
+                  />
                 </div>
                 <div class="d-flex flex-column gap-2">
                   <label for="director">Director</label>
-                  <input type="text" name="" id="director" placeholder="Director de la Pelicula" required>
+                  <input
+                    type="text"
+                    name="director"
+                    id="director"
+                    placeholder="Director de la Pelicula"
+                    required
+                  />
                 </div>
                 <div class="d-flex flex-column gap-2">
-                  <label for="year">Año</label> 
-                  <input type="number" name="" id="year" min="1000" max="9999" placeholder="Año de la Pelicula" required>
+                  <label for="year">Año</label>
+                  <input
+                    type="number"
+                    name="year"
+                    id="year"
+                    min="1000"
+                    max="9999"
+                    placeholder="Año de la Pelicula"
+                    required
+                  />
                 </div>
                 <div class="d-flex flex-column gap-2">
                   <label for="duration">Duración</label>
-                  <input type="text" name="" id="duration" placeholder="Duración de la Pelicula" required pattern="">
+                  <input
+                    type="text"
+                    name="duration"
+                    id="duration"
+                    placeholder="Duración de la Pelicula"
+                    required
+                  />
                 </div>
                 <div class="d-flex flex-column gap-2">
                   <label for="genre">Genero</label>
                   <select name="genre" id="genre" class="form-select" required>
-                    <option value="" disabled selected>Seleccionar genero</option>
+                    <option value="" disabled selected>
+                      Seleccionar genero
+                    </option>
                     <option value="Action">Acción</option>
                     <option value="Adventure">Aventura</option>
                     <option value="Animation">Animacción</option>
@@ -151,22 +239,94 @@
                 </div>
                 <div class="d-flex flex-column gap-2">
                   <label for="rate">Puntuación</label>
-                  <input type="range" name="" id="rate" min="0" max="5" step="1" placeholder="Puntuación de la Pelicula">
+                  <input
+                    type="number"
+                    name="rate"
+                    min="0"
+                    max="10"
+                    placeholder="Puntuación de la Pelicula"
+                  />
                 </div>
                 <div class="d-flex flex-column gap-2">
                   <label for="poster">Imagen</label>
-                  <input type="text" name="" id="poster" placeholder="Url de la Pelicula">
+                  <input
+                    type="text"
+                    name="poster"
+                    id="poster"
+                    placeholder="Url de la Pelicula"
+                  />
                 </div>
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button form="test" type="submit" class="btn btn-primary">Confirmar</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button form="add-movie" type="submit" class="btn btn-primary">
+                Confirmar
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      
+      <section class="py-4">
+        <h2
+          id="our-movies-title"
+          class="text-center d-flex align-items-center justify-content-center gap-4"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="64"
+            height="64"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-clapperboard"
+          >
+            <path
+              d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"
+            />
+            <path d="m6.2 5.3 3.1 3.9" />
+            <path d="m12.4 3.4 3.1 4" />
+            <path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+          </svg>
+          Our movies
+        </h2>
+        <div id="movies-cards" class="p-5"></div>
+      </section>
     </main>
+    <footer class="">Footer</footer>
+
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      data-bs-theme="dark"
+    >
+      <div
+        id="movie-created"
+        class="toast bg-danger-subtle"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <strong class="me-auto">Informacion</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">Se creo la pelicula exitosamente.</div>
+      </div>
+    </div>
+  </body>
 </html>
