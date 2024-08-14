@@ -1,0 +1,33 @@
+describe("la función agregarProducto", () => {
+    it("Debe agregar al carrito un producto", () => {
+        const carrito = new CarritoCompras
+        carrito.agregarProducto({name: "Producto1", price: 150, quantity:1});
+        expect(carrito.productos.length).toEqual(1);
+    });
+
+    it("Debe permitir agregar al carrito más de un producto", () => {
+        const carrito = new CarritoCompras();
+        carrito.agregarProducto({name: "Producto1", price: 150, quantity:1});
+        carrito.agregarProducto({name: "Producto2", price: 150, quantity:3});
+        expect(carrito.cantidadTotalProductos()).toEqual(4);
+    });
+
+})
+
+describe("La función calcularTotal", () => {
+    it("Debe calcular el total de la compra con un solo producto", () => {
+        carrito.agregarProducto({name: "Producto1", price: 150, quantity:2});
+        expect(carrito.calcularTotal()).toEqual(300);
+    });
+
+    it("Debe calcular el total de la compra con más de un producto", () => {
+        carrito.agregarProducto({name: "Producto1", price: 150, quantity:2});
+        carrito.agregarProducto({name: "Producto2", price: 100, quantity:1});
+        carrito.agregarProducto({name: "Producto3", price: 50, quantity:2});
+        expect(carrito.calcularTotal()).toEqual(500);
+    });
+
+    it("Debe arrojar un error en caso de carrito vacío", () => {
+        expect(() => carrito.calcularTotal()).toThrowError("Carrito Vacio");
+    });
+});
