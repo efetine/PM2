@@ -8,53 +8,47 @@ form.addEventListener("submit", createMovie);
 async function createMovie(event) {
   event.preventDefault();
 
-  // 1. Traer los datos del form, los datos que puso el usuario.
-  const formData = new FormData(form);
+  if (!form.checkValidity()) {
+    event.stopPropagation();
 
-  const title = formData.get("title");
-  const director = formData.get("director");
-  const year = formData.get("year");
-  const duration = formData.get("duration");
-  const genre = formData.get("genre");
-  const rate = formData.get("rate");
-  const poster = formData.get("poster");
+    form.classList.add("was-validated");
+  } else {
+    const formData = new FormData(form);
 
-  const movie = {
-    title,
-    director,
-    year,
-    duration,
-    genre,
-    rate,
-    poster,
-  };
-  //
-  // 2. Llamar a la API para que cree la pelicula con los datos
-  try {
-    const response = await axios.post("http://localhost:3000/movies", movie);
+    const title = formData.get("title");
+    const director = formData.get("director");
+    const year = formData.get("year");
+    const duration = formData.get("duration");
+    const genre = formData.get("genre");
+    const rate = formData.get("rate");
+    const poster = formData.get("poster");
 
-    const createdMovie = response.data;
+    const movie = {
+      title,
+      director,
+      year,
+      duration,
+      genre,
+      rate,
+      poster,
+    };
 
-    createMovieHTML(createdMovie);
+    try {
+      const response = await axios.post("http://localhost:3000/movies", movie);
 
-    form.reset();
+      const createdMovie = response.data;
 
-    const movieCreatedToastEl = document.getElementById("movie-created");
+      createMovieHTML(createdMovie);
 
-    const movieCreatedToast = new bootstrap.Toast(movieCreatedToastEl, {});
+      const movieCreatedToastEl = document.getElementById("movie-created");
 
-    movieCreatedToast.show();
+      const movieCreatedToast = new bootstrap.Toast(movieCreatedToastEl, {});
 
-    // const addMovieModalEl = document.getElementById("add-movie-modal");
+      movieCreatedToast.show();
 
-    // const addMovieModal = new bootstrap.Modal(addMovieModalEl, {});
-
-    // console.log(addMovieModal);
-
-    // addMovieModal.hide();
-  } catch (error) {
-    alert("No se pudo crear la pelicula");
+      form.reset();
+    } catch (error) {
+      alert("No se pudo crear la pelicula");
+    }
   }
-  //
-  // 3. Agregar la nueva pelicula a la pagina
 }

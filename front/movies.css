@@ -1,9 +1,14 @@
 #movies-cards {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 2rem;
 }
 
 #our-movies-title {
   font-size: 4rem;
+  margin: 2rem auto;
+  text-shadow: 1rem 1rem 1rem rgba(253, 253, 253, 0.5);
+  box-shadow: 1rem 1rem 1rem rgba(179, 23, 23, 0.2);
+  padding: 1rem;
+  margin-top: 0%;
 }

@@ -1,3 +1,38 @@
-#our-animes-title {
+.card-img-top {
+  height: 320px;
+}
+
+.card-text {
+  height: 12rem;
+}
+
+#our-series-title {
   font-size: 4rem;
+}
+
+h2 {
+  margin: 2rem auto;
+  text-shadow: 1rem 1rem 1rem rgba(253, 253, 253, 0.5);
+  box-shadow: 1rem 1rem 1rem rgba(179, 23, 23, 0.2);
+  padding: 1rem;
+  margin-top: 0%;
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+  overflow: hidden;
+  transition: transform 0.3s ease, background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+}
+.card:hover {
+  transform: scale(1.05);
+  background-color: rgba(0, 0, 0, 1);
+  box-shadow: 0 0 15px rgb(255, 255, 255);
 }

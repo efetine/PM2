@@ -1,14 +1,18 @@
 const axios = require("axios");
 
+const modalEl = document.getElementById("add-movie-modal");
+const formEl = document.getElementById("add-movie");
+
+modalEl.addEventListener("show.bs.modal", () => {
+  formEl.reset();
+  formEl.classList.remove("was-validated");
+});
+
 async function getMovies() {
   const response = await axios.get("http://localhost:3000/movies");
 
-  console.log(response.data);
-
   // const movies = [...response.data, ...response.data, ...response.data];
   const movies = response.data;
-
-  console.log({ movies });
 
   movies.map((movie) => createMovieHTML(movie));
 }
@@ -33,7 +37,7 @@ function createMovieHTML(movie) {
   const movieGenre = document.createElement("p");
   const movieRate = document.createElement("p");
   const moviePoster = document.createElement("img");
-  const deleteButton = document.createElement("button");
+  // const deleteButton = document.createElement("button");
 
   cardMovie.className = "card bg-dark text-white";
   cardMovie.style = "width: 18rem";
@@ -58,12 +62,11 @@ function createMovieHTML(movie) {
   moviePoster.style = "width: 18rem; height: 28rem";
   // moviePoster.alt = `Poster of ${title}`;
 
-  deleteButton.innerText = "X";
-  deleteButton.className =
-    "btn btn-secondary position-absolute top-0 end-0 m-1";
-  deleteButton.style = "width: 3rem; height: 3rem;";
+  // deleteButton.innerText = "X";
+  // deleteButton.className =
+  //   "btn btn-secondary position-absolute top-0 end-0 m-1";
+  // deleteButton.style = "width: 3rem; height: 3rem;";
   // deleteButton.onclick = () => deleteMovie(movie._id);
-  // deleteButton["data-bs-target"] = "delete-modal";
 
   cardBody.appendChild(movieTitle);
   cardBody.appendChild(movieDirector);
@@ -73,7 +76,7 @@ function createMovieHTML(movie) {
   cardBody.appendChild(movieRate);
   cardMovie.appendChild(moviePoster);
   cardMovie.appendChild(cardBody);
-  cardBody.appendChild(deleteButton);
+  // cardBody.appendChild(deleteButton);
 
   const moviesContainer = document.getElementById("movies-cards");
   moviesContainer.appendChild(cardMovie);
