@@ -1,7 +1,3 @@
-const cleanFormButton = document.getElementById("clean-form-button");
-
-cleanFormButton.addEventListener("click", cleanForm);
-
 function cleanForm() {
   const form = document.getElementById("add-movie");
 
@@ -9,3 +5,7 @@ function cleanForm() {
 
   form.classList.remove("was-validated");
 }
+
+module.exports = {
+  cleanForm,
+};

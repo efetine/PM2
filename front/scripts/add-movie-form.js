@@ -1,19 +1,17 @@
 const axios = require("axios");
-const { createMovieHTML } = require("./index");
-
-const form = document.getElementById("add-movie");
-
-form.addEventListener("submit", createMovie);
+const { createMovieHTML } = require("./create-movie-html");
 
 async function createMovie(event) {
   event.preventDefault();
 
-  if (!form.checkValidity()) {
+  const formEl = document.getElementById("add-movie");
+
+  if (!formEl.checkValidity()) {
     event.stopPropagation();
 
-    form.classList.add("was-validated");
+    formEl.classList.add("was-validated");
   } else {
-    const formData = new FormData(form);
+    const formData = new FormData(formEl);
 
     const title = formData.get("title");
     const director = formData.get("director");
@@ -36,9 +34,9 @@ async function createMovie(event) {
     try {
       const response = await axios.post("http://localhost:3000/movies", movie);
 
-      const createdMovie = response.data;
+      // const createdMovie = response.data;
 
-      createMovieHTML(createdMovie);
+      // createMovieHTML(createdMovie);
 
       const movieCreatedToastEl = document.getElementById("movie-created");
 
@@ -46,9 +44,14 @@ async function createMovie(event) {
 
       movieCreatedToast.show();
 
-      form.reset();
+      formEl.reset();
+      formEl.classList.remove("was-validated");
     } catch (error) {
       alert("No se pudo crear la pelicula");
     }
   }
 }
+
+module.exports = {
+  createMovie,
+};
